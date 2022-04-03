@@ -1,93 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Simple Catcher</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Catching</title>
+    <link href="style.css" rel="stylesheet" />
   </head>
   <body>
     <a href="https://www.starche.org/">
-      <img src="https://www.starche.org/starche.png" width="300" />
+      <img
+        id="logo"
+        src="https://www.starche.org/starche.png"
+        alt="starche.org"
+        height="25"
+      />
     </a>
-    <div style="text-align: center">
-      <h1>Simple Catcher</h1>
-    </div>
-    <div style="background-color: DeepSkyBlue; width: 640px; margin: auto">
-      <canvas id="gameCanvas" width="640" height="480"></canvas>
+    <div id="title">
+      <h1>Simple Catching</h1>
+      <canvas id="gameCanvas" width="640" ; height="480"></canvas>
     </div>
     <div style="display: none">
       <img id="food" src="cherry.png" />
       <img id="player" src="player.png" />
     </div>
-    <script>
-      var ctx = gameCanvas.getContext("2d");
-      var x = 300,
-        moveRight = false,
-        moveLeft = false,
-        y = 50,
-        monsterX = 300,
-        changeX = 0,
-        score = 0;
-
-      var gameTimer = setInterval(mainLoop, 20);
-      function mainLoop() {
-        ctx.clearRect(0, 0, 640, 480);
-        ctx.font = "30px Arial";
-        ctx.fillText("score: " + score, 10, 30);
-        ctx.drawImage(food, x, y, 80, 80);
-        y += 6;
-        if (y > 480) {
-          y = -80;
-          x = Math.random() * 600;
-        }
-        ctx.drawImage(player, monsterX, 400, 80, 80);
-        monsterX += changeX;
-        checkForHits();
-      }
-      function checkKeys() {
-        if (moveLeft == true && moveRight == true) {
-          changeX = 0;
-        } else if (moveLeft) {
-          changeX = -4;
-        } else if (moveRight) {
-          changeX = 4;
-        } else {
-          changeX = 0;
-        }
-      }
-      document.onkeydown = keyPressed;
-      function keyPressed(e) {
-        var k = e.keyCode;
-        if (k == 37) {
-          moveLeft = true;
-        }
-        if (k == 39) {
-          moveRight = true;
-        }
-        checkKeys();
-      }
-      document.onkeyup = keyUnPressed;
-      function keyUnPressed(e) {
-        var k = e.keyCode;
-        if (k == 37) {
-          moveLeft = false;
-        }
-        if (k == 39) {
-          moveRight = false;
-        }
-        checkKeys();
-      }
-      function checkForHits() {
-        if (Math.abs(400 - y) < 60 && Math.abs(monsterX - x) < 60) {
-          score += 5;
-          y = -80;
-          x = Math.random() * 600;
-        }
-      }
-      setTimeout(gameOver, 30000);
-      function gameOver() {
-        clearInterval(gameTimer);
-        ctx.font = "80px Arial";
-        ctx.fillText("Game Over", 100, 250);
-      }
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
